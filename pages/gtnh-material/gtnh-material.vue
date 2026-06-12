@@ -14,6 +14,7 @@
 
 <script setup>
 import { ref } from 'vue';
+import { onLoad } from '@dcloudio/uni-app'
 
 const categories = ['全部', '机器主方块', '外壳方块'];
 const selectedCategory = ref('');
@@ -21,6 +22,13 @@ const selectedCategory = ref('');
 const selectCategory = (category) => {
   selectedCategory.value = category;
 };
+
+
+onLoad(() => {
+	selectedCategory.value = categories[0]
+})
+
+
 </script>
 
 <style scoped>
@@ -43,6 +51,8 @@ const selectCategory = (category) => {
   border: none;
   background-color: #fff;
   cursor: pointer;
+	
+	font-size: 16rpx;
 }
 
 .sidebar button:hover {
@@ -50,7 +60,6 @@ const selectCategory = (category) => {
 }
 
 .content {
-  flex-grow: 1;
   padding: 20rpx;
 }
 </style>
