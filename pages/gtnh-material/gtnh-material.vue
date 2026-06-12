@@ -15,7 +15,7 @@
 <script setup>
 import { ref } from 'vue';
 
-const categories = ['全部', '功能', '杂项'];
+const categories = ['全部', '机器主方块', '外壳方块'];
 const selectedCategory = ref('');
 
 const selectCategory = (category) => {
@@ -26,10 +26,11 @@ const selectCategory = (category) => {
 <style scoped>
 .container {
   display: flex;
+	height: 100%;
 }
 
 .sidebar {
-  width: 200px;
+  width: 150rpx;
   background-color: #f4f4f4;
   padding: 10px;
   border-right: 1px solid #ccc;
