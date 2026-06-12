@@ -32,6 +32,7 @@ onLoad(() => {
 <style scoped>
 .container {
   display: flex;
+	
 }
 
 .sidebar {
