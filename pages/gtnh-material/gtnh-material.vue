@@ -1,7 +1,7 @@
 <template>
   <view class="container">
     <view class="sidebar">
-      <button v-for="(category, index) in categories" :key="index" @click="selectCategory(category)">
+      <button v-for="(category, index) in categories" :key="index" @click="selectCategory(category)" :class="{ 'active': selectedCategory === category }">
         {{ category }}
       </button>
     </view>
@@ -27,8 +27,6 @@ const selectCategory = (category) => {
 onLoad(() => {
 	selectedCategory.value = categories[0]
 })
-
-
 </script>
 
 <style scoped>
@@ -51,8 +49,12 @@ onLoad(() => {
   border: none;
   background-color: #fff;
   cursor: pointer;
-	
 	font-size: 16rpx;
+}
+
+.sidebar button.active {
+  background-color: #1890ff;
+  color: #fff;
 }
 
 .sidebar button:hover {
