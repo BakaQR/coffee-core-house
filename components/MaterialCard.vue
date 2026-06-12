@@ -19,15 +19,21 @@ import { defineProps } from 'vue';
 const props = defineProps({
   icon: {
     type: String,
-    default: ''
+    default: '/static/logo.png'
   },
   title: {
     type: String,
+		default: '默认标题',
     required: true
   },
   sections: {
     type: Array,
-    default: () => []
+    default: () => [
+			{title: '标题1', content: '内容1'},
+			{title: '标题2', content: '内容2'},
+			{title: '标题3', content: '内容3'},
+			{title: '标题3', content: '内容3'},
+		]
   }
 });
 </script>
