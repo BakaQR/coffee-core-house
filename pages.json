@@ -12,12 +12,6 @@
 			"navigationBarTitleText": "GTNH 矿脉区块计算器",
 			"enablePullDownRefresh": true
 		}
-	},
-	{
-		"path": "pages/store/store",
-		"style": {
-			"navigationBarTitleText": "Store"
-		}
 	}
 ],
 	"globalStyle": {
