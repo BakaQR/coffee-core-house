@@ -1,9 +1,9 @@
 <template>
   <view class="container">
     <view class="sidebar">
-      <button v-for="(category, index) in categories" :key="index" @click="selectCategory(category)" :class="{ 'active': selectedCategory === category }">
+      <view v-for="(category, index) in categories" :key="index" @click="selectCategory(category)" :class="{ 'active': selectedCategory === category }">
         {{ category }}
-      </button>
+      </view>
     </view>
     <view class="content">
       <text v-if="selectedCategory">当前分类: {{ selectedCategory }}</text>
@@ -42,31 +42,30 @@ onLoad(() => {
   border-right: 1rpx solid #ccc;
 }
 
-.sidebar button {
+.sidebar view {
   width: 100%;
   margin-bottom: 10rpx;
   padding: 20rpx;
-  border: none;
-  background-color: transparent;
   color: #333;
   font-size: 16rpx;
   cursor: pointer;
 }
 
-.sidebar button.active {
+.sidebar view.active {
   background-color: #e6f4ff;
   color: #1890ff;
 }
 
-.sidebar button:hover {
+.sidebar view:hover {
   background-color: #f0f0f0;
 }
 
-.sidebar button:active {
+.sidebar view:active {
   background-color: #e6f4ff;
 }
 
 .content {
+  flex-grow: 1;
   padding: 20rpx;
 }
 </style>
