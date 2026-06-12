@@ -32,7 +32,6 @@ onLoad(() => {
 <style scoped>
 .container {
   display: flex;
-	
 }
 
 .sidebar {
@@ -54,12 +53,16 @@ onLoad(() => {
 }
 
 .sidebar button.active {
-  background-color: #e0e0e0;
+  background-color: #e6f4ff;
   color: #1890ff;
 }
 
 .sidebar button:hover {
   background-color: #f0f0f0;
+}
+
+.sidebar button:active {
+  background-color: #e6f4ff;
 }
 
 .content {
