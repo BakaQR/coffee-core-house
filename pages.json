@@ -12,6 +12,12 @@
 			"navigationBarTitleText": "GTNH 矿脉区块计算器",
 			"enablePullDownRefresh": true
 		}
+	},
+	{
+		"path": "pages/gtnh-material/gtnh-material",
+		"style": {
+			"navigationBarTitleText": "GTNH 材料计算器"
+		}
 	}
 ],
 	"globalStyle": {
