@@ -32,14 +32,14 @@ const selectCategory = (category) => {
 .sidebar {
   width: 150rpx;
   background-color: #f4f4f4;
-  padding: 10px;
-  border-right: 1px solid #ccc;
+  padding: 10rpx;
+  border-right: 1rpx solid #ccc;
 }
 
 .sidebar button {
   width: 100%;
-  margin-bottom: 10px;
-  padding: 10px;
+  margin-bottom: 10rpx;
+  padding: 10rpx;
   border: none;
   background-color: #fff;
   cursor: pointer;
@@ -51,6 +51,6 @@ const selectCategory = (category) => {
 
 .content {
   flex-grow: 1;
-  padding: 20px;
+  padding: 20rpx;
 }
 </style>
