@@ -32,6 +32,7 @@ onLoad(() => {
 <style scoped>
 .container {
   display: flex;
+	height: 100%;
 }
 
 .sidebar {
@@ -66,7 +67,6 @@ onLoad(() => {
 }
 
 .content {
-  flex-grow: 1;
   padding: 20rpx;
 }
 </style>
