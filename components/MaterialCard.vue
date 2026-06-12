@@ -23,17 +23,17 @@ const props = defineProps({
   },
   title: {
     type: String,
-		default: '默认标题',
+    default: '默认标题',
     required: true
   },
   sections: {
     type: Array,
     default: () => [
-			{title: '标题1', content: '内容1'},
-			{title: '标题2', content: '内容2'},
-			{title: '标题3', content: '内容3'},
-			{title: '标题3', content: '内容3'},
-		]
+      {title: '标题1', content: '内容1'},
+      {title: '标题2', content: '内容2'},
+      {title: '标题3', content: '内容3'},
+      {title: '标题4', content: '内容4'},
+    ]
   }
 });
 </script>
@@ -69,12 +69,15 @@ $font-size-xl: 20rpx;
 
 .content {
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-around;
   padding: 20rpx;
 }
 
 .section {
   text-align: center;
+  width: 30%;
+  box-sizing: border-box;
 }
 
 .section-title {
