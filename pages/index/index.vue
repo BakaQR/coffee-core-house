@@ -1,14 +1,53 @@
 <template>
 	<view class="container">
-		<view class="intro">本项目已包含uni ui组件，无需import和注册，可直接使用。在代码区键入字母u，即可通过代码助手列出所有可用组件。光标置于组件名称处按F1，即可查看组件文档。</view>
-		<text class="intro">详见：</text>
-		<uni-link :href="href" :text="href"></uni-link>
+		<text>app name: {{ appName }} \n</text>
+		<text>vertsion: {{ version }} \n</text>
+		<text class="intro">组件文档：</text>
+		<uni-link class="uni-link" :href="href" :text="href"></uni-link>
+		
+		<button class="navigate-to-button" @click="uni.navigateTo({
+			url: '/pages/gtnh-calculate/gtnh-calculate',
+			success: (res) => { 
+				res.eventChannel.emit('acceptData', { id: 'bakaqr', title: 'gtnh-calculate' })
+			},
+			fail: () => console.log('fail'),
+			events: {
+				acceptData: function(data) { console.log(data) }
+			},
+			animationType: 'pop-in',
+			animationDuration: 500
+		})">跳转至GTNH工具页</button>
+		
 	</view>
 </template>
 
 <script setup>
 import { ref } from 'vue';
+import { onHide, onShow, onLoad, onUnload } from '@dcloudio/uni-app'
+
 const href = ref('https://uniapp.dcloud.io/component/README?id=uniui')
+
+const app = getApp()
+const appName = ref(app.globalData.appName)
+const version = ref(app.globalData.version)
+
+
+
+onHide(() => {
+	console.log('index on hide')
+})
+
+onShow(() => {
+	console.log('index on show')
+})
+
+onLoad(() => {
+	console.log('index on load')
+})
+
+onUnload(() => {
+	console.log('index on unload')
+})
 
 </script>
 
@@ -17,5 +56,15 @@ const href = ref('https://uniapp.dcloud.io/component/README?id=uniui')
 	padding: 20px;
 	font-size: 14px;
 	line-height: 24px;
+}
+
+.navigate-to-button{
+	width: 250rpx;
+	height: 50rpx;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	font-size: 18rpx;
+	
 }
 </style>

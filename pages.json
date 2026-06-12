@@ -3,13 +3,14 @@
 		"path": "pages/index/index",
 		"style": {
 			"navigationBarTitleText": "uni-app"
-			
 		}
+		
 	},
 	{
 		"path": "pages/gtnh-calculate/gtnh-calculate",
 		"style": {
-			"navigationBarTitleText": "GTNH 矿脉区块计算器"
+			"navigationBarTitleText": "GTNH 矿脉区块计算器",
+			"enablePullDownRefresh": true
 		}
 	}
 ],
@@ -21,5 +22,6 @@
 		"app-plus": {
 			"background": "#efeff4"
 		}
+		
 	}
 }

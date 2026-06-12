@@ -12,7 +12,8 @@
 		
 		// 全局变量
 		globalData: {
-			version: '0.0.1'			
+			appName: 'Coffee Tools',
+			version: '0.0.1',
 		}
 	}
 </script>
