@@ -18,6 +18,19 @@
 			animationDuration: 500
 		})">跳转至GTNH工具页</button>
 		
+		<button class="navigate-to-button" @click="uni.navigateTo({
+			url: '/pages/gtnh-material/gtnh-material',
+			success: (res) => { 
+				res.eventChannel.emit('acceptData', { id: 'bakaqr', title: 'gtnh-material' })
+			},
+			fail: () => console.log('fail'),
+			events: {
+				acceptData: function(data) { console.log(data) }
+			},
+			animationType: 'pop-in',
+			animationDuration: 500
+		})">跳转至GTNH材料计算器</button>
+		
 	</view>
 </template>
 
@@ -65,6 +78,6 @@ onUnload(() => {
 	justify-content: center;
 	align-items: center;
 	font-size: 18rpx;
-	
+	margin-top: 10px; /* 添加一些间距 */
 }
 </style>
