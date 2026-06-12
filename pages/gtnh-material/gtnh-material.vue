@@ -7,7 +7,16 @@
     </view>
     <view class="content">
       <text v-if="selectedCategory">当前分类: {{ selectedCategory }}</text>
-      <!-- 在这里添加右边栏的内容 -->
+      <MaterialCard class="content-material-card" />
+      <MaterialCard class="content-material-card" />
+      <MaterialCard class="content-material-card" />
+      <MaterialCard class="content-material-card" />
+      <MaterialCard class="content-material-card" />
+      <MaterialCard class="content-material-card" />
+      <MaterialCard class="content-material-card" />
+      <MaterialCard class="content-material-card" />
+      <MaterialCard class="content-material-card" />
+      <MaterialCard class="content-material-card" />
     </view>
   </view>
 </template>
@@ -15,8 +24,9 @@
 <script setup>
 import { ref } from 'vue';
 import { onLoad } from '@dcloudio/uni-app'
+import MaterialCard from '@/components/MaterialCard.vue'
 
-const categories = ['全部', '机器主方块', '外壳方块'];
+const categories = ['全部', '机器', '外壳'];
 const selectedCategory = ref('');
 
 const selectCategory = (category) => {
@@ -29,31 +39,38 @@ onLoad(() => {
 })
 </script>
 
-<style scoped>
+<style scoped lang="scss">
+$font-size-normal: 18rpx;
+$font-size-xl: 20rpx;
+
 .container {
-  display: flex;
 	height: 100%;
+	padding: 0;
+  display: flex;
 }
 
 .sidebar {
   width: 150rpx;
-  background-color: #f4f4f4;
-  padding: 10rpx;
-  border-right: 1rpx solid #ccc;
+  background-color: #f8f8f8;
 }
 
 .sidebar view {
-  width: 100%;
-  margin-bottom: 10rpx;
-  padding: 20rpx;
+  padding: 16rpx;
+	margin: 16rpx 8rpx;
   color: #333;
-  font-size: 16rpx;
+  font-size: $font-size-xl;
+	text-align: center;
   cursor: pointer;
+	border-radius: 8rpx;
 }
 
 .sidebar view.active {
   background-color: #e6f4ff;
   color: #1890ff;
+	
+	&:hover{
+		background-color: #e6f4ff;
+	}
 }
 
 .sidebar view:hover {
@@ -67,5 +84,12 @@ onLoad(() => {
 .content {
   flex-grow: 1;
   padding: 20rpx;
+	font-size: $font-size-normal;
+	overflow-y: auto;
+}
+
+.content-material-card{
+	margin: 16rpx 0;
+	
 }
 </style>

@@ -6,8 +6,10 @@
     </view>
     <view class="content">
       <view class="section" v-for="(section, index) in sections" :key="index">
-        <text class="section-title">{{ section.title }}</text>
-        <text class="section-content">{{ section.content }}</text>
+				<image v-if="section.icon" :src="section.icon" class="section-icon"></image>
+				<text class="section-name">{{ section.name }}</text>
+				<text>&nbsp;*&nbsp;</text>
+				<text class="section-number">{{ section.number }}</text>
       </view>
     </view>
   </view>
@@ -29,21 +31,21 @@ const props = defineProps({
   sections: {
     type: Array,
     default: () => [
-      {title: '标题1', content: '内容1'},
-      {title: '标题2', content: '内容2'},
-      {title: '标题3', content: '内容3'},
-      {title: '标题4', content: '内容4'},
+      { icon: '/static/gtnh/material/Bronze.png', name: '青铜锭', number: '8' },
+      { icon: '/static/c2.png', name: '标题2', number: '2' },
+      { icon: '/static/c3.png', name: '标题3', number: '3' },
+      { icon: '/static/c4.png', name: '标题4', number: '4' },
     ]
   }
 });
 </script>
 
 <style scoped lang="scss">
-$font-size-normal: 16rpx;
+$font-size-normal: 18rpx;
 $font-size-xl: 20rpx;
 
 .material-card {
-  width: 250rpx;
+  width: 100%;
   border-radius: 10rpx;
   box-shadow: 0 4rpx 8rpx rgba(0, 0, 0, 0.1);
   overflow: hidden;
@@ -51,6 +53,7 @@ $font-size-xl: 20rpx;
 
 .header {
   display: flex;
+	justify-content: center;
   align-items: center;
   padding: 20rpx;
   background-color: #f0f0f0;
@@ -72,22 +75,28 @@ $font-size-xl: 20rpx;
   flex-wrap: wrap;
   justify-content: space-around;
   padding: 20rpx;
+	gap: 16rpx 0;
 }
 
 .section {
   text-align: center;
   width: 30%;
+	height: 40rpx;
   box-sizing: border-box;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }
 
 .section-title {
   font-size: $font-size-normal;
   color: #666;
-  margin-bottom: 8rpx;
 }
 
-.section-content {
-  font-size: $font-size-xl;
-  color: #333;
+.section-icon{
+	width: 24rpx;
+	height: 24rpx;
+	margin-right: 8rpx;
 }
+
 </style>

@@ -1,5 +1,4 @@
 .hbuilderx
 unpackage
 .aider*
-.aider.chat.history.md
-.aider.input.history
+CONVENTIONS.md
