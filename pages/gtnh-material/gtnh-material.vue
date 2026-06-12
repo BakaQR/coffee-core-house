@@ -26,7 +26,6 @@ const selectCategory = (category) => {
 <style scoped>
 .container {
   display: flex;
-  height: 100vh;
 }
 
 .sidebar {
