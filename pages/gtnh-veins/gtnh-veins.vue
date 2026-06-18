@@ -7,35 +7,129 @@
 			</text>
 			<uni-section title="请输入x坐标" type="line" padding titleFontSize='16rpx' >
 				<uni-easyinput type="number" trim="all" placeholder="请输入x坐标"
-				v-model="xInput.display" @input="xInput.onInput" @blur="xInput.onBlur" 
-				@clear="xInput.onClear">
+					v-model="xInput.display" @input="xInput.onInput" @blur="xInput.onBlur" 
+					@clear="xInput.onClear">
 				</uni-easyinput>
 			</uni-section>
-			<uni-section title="请输入y坐标" type="line" padding titleFontSize='16rpx' >
-				<uni-easyinput type="number" trim="all" placeholder="请输入y坐标"
-				v-model="yInput.display" @input="yInput.onInput" @blur="yInput.onBlur"
-				@clear="yInput.onClear">
+			<uni-section title="请输入z坐标" type="line" padding titleFontSize='16rpx' >
+				<uni-easyinput type="number" trim="all" placeholder="请输入z坐标"
+					v-model="zInput.display" @input="zInput.onInput" @blur="zInput.onBlur"
+					@clear="zInput.onClear">
 				</uni-easyinput>
 			</uni-section>
-			<uni-section title="请输入半径" type="line" padding titleFontSize='16rpx' >
+			<uni-section title="请输入搜索半径" type="line" padding titleFontSize='16rpx' >
 				<uni-easyinput type="number" trim="all" placeholder="请输入半径"
-				v-model="rInput.display" @input="rInput.onInput" @blur="rInput.onBlur"
-				@clear="rInput.onClear">
+					v-model="rInput.display" @input="rInput.onInput" @blur="rInput.onBlur"
+					@clear="rInput.onClear">
 				</uni-easyinput>
 			</uni-section>
+			
+			<text class="title-text">矿脉坐标</text>
+			<uni-section title="请注意坐标，使用的是 X 和 Z" type="line" titleFontSize='16rpx' ></uni-section>
+			<view class="echarts">
+				<l-echart ref="chartRef" @finished="initChart" ></l-echart>
+			</view>
 		</view>
 	</view>
 </template>
 
 <script setup>
-import { ref } from 'vue'
-import {onHide, onShow, onLoad, onUnload } from '@dcloudio/uni-app'
+import { computed, ref, watch } from 'vue'
+import { onHide, onShow, onLoad, onUnload } from '@dcloudio/uni-app'
 import { getVeinOriginsSquare } from '@/utils/veins-calculater.js'
 import { useIntegerInput } from '@/utils/integer-input.js'
 
 const xInput = useIntegerInput(0)
-const yInput = useIntegerInput(0)
-const rInput = useIntegerInput(48)
+const zInput = useIntegerInput(0)
+const rInput = useIntegerInput(100)
+
+// ECharts
+const chartRef = ref(null)
+// 仅在小程序环境下引入 ECharts
+// #ifdef MP
+const echarts = require('@/static/echarts.js') // 根据实际路径调整
+// #endif
+// #ifndef MP
+const echarts = null // H5 和 App 环境不需要手动引入
+// #endif
+
+// 渲染点数据
+const points = ref(getVeinOriginsSquare(parseInt(xInput.display), parseInt(zInput.display), parseInt(rInput.display)))
+// 偏移坐标并设置距离
+const pointsOffset = ref(points.value.map(p => [
+	p[0] - parseInt(xInput.display),
+	p[1] - parseInt(zInput.display),
+	Math.hypot(p[0] - parseInt(xInput.display), p[1] - parseInt(zInput.display))
+]))
+
+// echarts 选项
+const option = {
+  tooltip: { 
+		trigger:'item',
+		formatter(params) {
+			return `X : ${params.data[0] + parseInt(xInput.display)}, Y: ${params.data[1] + parseInt(zInput.display)}`
+		}
+	},
+  xAxis: { 
+		type: 'value',
+		name: 'X',
+		axisLabel: { formatter: v => v + parseInt(xInput.display) },
+	},
+  yAxis: { 
+		type:'value' ,
+		name: 'Z',
+		inverse: true,
+		nameLocation: 'start',
+		axisLabel: { formatter: v => v + parseInt(zInput.display) },
+	},
+  series: [
+    {
+      type: 'scatter',
+      symbolSize: 16,
+      data: pointsOffset.value,
+    }
+  ],
+	visualMap: {
+	  min: 0,
+	  max: rInput.display,
+	  dimension: 2,
+	  inRange: {
+	    color: ['#ff2600', '#ffff00', '#22ff00', '#0000ff']
+	  },
+	},
+}
+
+// 初始化
+const initChart = async () => {
+	console.log('init chart')
+	if (!chartRef.value) return
+	
+	try {
+	  const chart = await chartRef.value.init(echarts)
+	  chart.setOption(option)
+	} catch (error) {
+	  console.error('图表初始化失败:', error)
+	}
+}
+
+watch([() => xInput.display, () => zInput.display, () => rInput.display], () => {
+	// 更新渲染点数据
+	points.value = getVeinOriginsSquare(parseInt(xInput.display), parseInt(zInput.display), parseInt(rInput.display))
+	pointsOffset.value = points.value.map(p => [
+		p[0] - parseInt(xInput.display),
+		p[1] - parseInt(zInput.display),
+		Math.hypot(p[0] - parseInt(xInput.display), p[1] - parseInt(zInput.display))
+	])
+	
+	// 更新图表渲染点
+	chartRef.value?.setOption({
+		series: [{ data: pointsOffset.value }]
+	}, true)
+	// 更新渲染点距离
+	chartRef.value?.setOption({
+		visualMap: { max: parseInt(rInput.display) || 0 }
+	})
+})
 
 
 onHide(() => {
@@ -81,6 +175,12 @@ onUnload(() => {
 .description-text {
 	font-size: fs('small');
 	color: #6c6c6c;
+}
+
+.echarts	{
+	width: 600rpx;
+	height: 600rpx;
+	margin: auto;
 }
 
 

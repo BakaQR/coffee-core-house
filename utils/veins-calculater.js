@@ -18,9 +18,10 @@ export const getVeinOriginsSquare = (cx, cy, R) => {
       const py = b * STEP + OFFSET;
       const dy = py - cy;
       if (Math.abs(dy) > R) continue;
-      results.push({ x: px, y: py });
+      results.push([px, py]);
     }
   }
-
+	
+	results.push([cx, cy])
   return results;
 }

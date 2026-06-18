@@ -14,8 +14,9 @@ export function useIntegerInput(initialValue = '') {
         hasSign = true
       }
     }
-
+		
     display.value = result
+		
   }
 
   function onBlur() {
@@ -35,6 +36,7 @@ export function useIntegerInput(initialValue = '') {
     if (v === '-0') v = '0'
 
     display.value = v
+		
   }
 	
 	const onClear = () => {
