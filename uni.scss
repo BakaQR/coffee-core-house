@@ -1,1 +1,12 @@
 @import '@/uni_modules/uni-scss/variables.scss';
+
+$font-size: (
+	'small' : 14rpx,
+	'normal' : 16rpx,
+	'xl' : 18rpx,
+	'xxl' : 20rpx
+);
+
+@function fs($size-name) {
+	@return map-get($font-size, $size-name);
+}

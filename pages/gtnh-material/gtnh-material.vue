@@ -33,7 +33,6 @@ const selectCategory = (category) => {
   selectedCategory.value = category;
 };
 
-
 onLoad(() => {
 	selectedCategory.value = categories[0]
 })

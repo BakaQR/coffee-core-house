@@ -17,6 +17,7 @@
 
 <script setup>
 import { defineProps } from 'vue';
+import { RAW } from '/types/gtnh-material.js'
 
 const props = defineProps({
   icon: {
@@ -32,9 +33,10 @@ const props = defineProps({
     type: Array,
     default: () => [
       { icon: '/static/gtnh/material/Bronze.png', name: '青铜锭', number: '8' },
-      { icon: '/static/c2.png', name: '标题2', number: '2' },
+      { icon: RAW.iron.icon, name: RAW.iron.name, number: '2' },
       { icon: '/static/c3.png', name: '标题3', number: '3' },
       { icon: '/static/c4.png', name: '标题4', number: '4' },
+      { icon: '/static/c4.png', name: '标题5', number: '5' },
     ]
   }
 });
@@ -46,9 +48,10 @@ $font-size-xl: 20rpx;
 
 .material-card {
   width: 100%;
-  border-radius: 10rpx;
-  box-shadow: 0 4rpx 8rpx rgba(0, 0, 0, 0.1);
+  border-radius: 4rpx;
+  box-shadow: 0 4rpx 4rpx rgba(0, 0, 0, 0.1);
   overflow: hidden;
+  background-color: #ffffff;
 }
 
 .header {
@@ -56,7 +59,8 @@ $font-size-xl: 20rpx;
 	justify-content: center;
   align-items: center;
   padding: 20rpx;
-  background-color: #f0f0f0;
+	border-bottom: 1rpx solid #DCDCDC;
+	margin: 0 16rpx;
 }
 
 .icon {

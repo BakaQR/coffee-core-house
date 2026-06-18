@@ -12,7 +12,7 @@
 		
 		// 全局变量
 		globalData: {
-			appName: 'Coffee Tools',
+			appName: 'Coffee Core Tools',
 			version: '0.0.1',
 		}
 	}
@@ -27,8 +27,8 @@
 	page {
 		background-color: #f5f5f5;
 		height: 100%;
-		overflow: hidden;
-		
+		overflow: auto;
+		margin: 0 auto;
 	}
 
 	/* #endif */

@@ -2,15 +2,14 @@
 	"pages": [{
 		"path": "pages/index/index",
 		"style": {
-			"navigationBarTitleText": "uni-app"
+			"navigationBarTitleText": "咖啡核工具小屋"
 		}
 		
 	},
 	{
-		"path": "pages/gtnh-calculate/gtnh-calculate",
+		"path": "pages/gtnh-veins/gtnh-veins",
 		"style": {
-			"navigationBarTitleText": "GTNH 矿脉区块计算器",
-			"enablePullDownRefresh": true
+			"navigationBarTitleText": "GTNH 矿脉区块定位器"
 		}
 	},
 	{
@@ -22,7 +21,7 @@
 ],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
-		"navigationBarTitleText": "uni-app",
+		"navigationBarTitleText": "咖啡核工具小屋",
 		"navigationBarBackgroundColor": "#F8F8F8",
 		"backgroundColor": "#F8F8F8",
 		"app-plus": {
