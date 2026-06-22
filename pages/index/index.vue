@@ -112,7 +112,7 @@ const outsideNavList = [
 		id: 102, name: '听懂一切', 
 		icon: '/static/logo/logo-tdyq.png',
 		url: 'https://tingdong.cn/',
-		description: '各种音频及产品的云试听，可作为参考'
+		description: '各种音频产品的云试听，可作为参考'
 	},
 ]
 
