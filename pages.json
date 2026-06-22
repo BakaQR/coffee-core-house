@@ -17,6 +17,12 @@
 		"style": {
 			"navigationBarTitleText": "GTNH 材料计算器"
 		}
+	},
+	{
+		"path": "pages/webview/webview",
+		"style": {
+			"navigationBarTitleText": ""
+		}
 	}
 ],
 	"globalStyle": {

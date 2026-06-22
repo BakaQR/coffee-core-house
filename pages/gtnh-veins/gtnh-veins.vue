@@ -5,27 +5,27 @@
 			<text class="description-text">
 				通过输入坐标及半径计算附近矿脉原点坐标，矿脉原点分布步长为48
 			</text>
-			<uni-section title="请输入x坐标" type="line" padding titleFontSize='16rpx' >
-				<uni-easyinput type="number" trim="all" placeholder="请输入x坐标"
+			<uni-section title="请输入x坐标" type="line" padding titleFontSize='22rpx' >
+				<uni-easyinput type="text" trim="all" placeholder="请输入x坐标"
 					v-model="xInput.display" @input="xInput.onInput" @blur="xInput.onBlur" 
 					@clear="xInput.onClear">
 				</uni-easyinput>
 			</uni-section>
-			<uni-section title="请输入z坐标" type="line" padding titleFontSize='16rpx' >
-				<uni-easyinput type="number" trim="all" placeholder="请输入z坐标"
+			<uni-section title="请输入z坐标" type="line" padding titleFontSize='22rpx' >
+				<uni-easyinput type="text" trim="all" placeholder="请输入z坐标"
 					v-model="zInput.display" @input="zInput.onInput" @blur="zInput.onBlur"
 					@clear="zInput.onClear">
 				</uni-easyinput>
 			</uni-section>
-			<uni-section title="请输入搜索半径" type="line" padding titleFontSize='16rpx' >
-				<uni-easyinput type="number" trim="all" placeholder="请输入半径"
+			<uni-section title="请输入搜索半径" type="line" padding titleFontSize='22rpx' >
+				<uni-easyinput type="number" trim="all" placeholder="请输入搜索半径"
 					v-model="rInput.display" @input="rInput.onInput" @blur="rInput.onBlur"
 					@clear="rInput.onClear">
 				</uni-easyinput>
 			</uni-section>
 			
 			<text class="title-text">矿脉坐标</text>
-			<uni-section title="请注意坐标，使用的是 X 和 Z" type="line" titleFontSize='16rpx' ></uni-section>
+			<uni-section title="请注意坐标，使用的是 X 和 Z" type="line" titleFontSize='22rpx' ></uni-section>
 			<view class="echarts">
 				<l-echart ref="chartRef" @finished="initChart" ></l-echart>
 			</view>
@@ -47,7 +47,7 @@ const rInput = useIntegerInput(100)
 const chartRef = ref(null)
 // 仅在小程序环境下引入 ECharts
 // #ifdef MP
-const echarts = require('@/static/echarts.js') // 根据实际路径调整
+const echarts = require('../../static/echarts.min.js')
 // #endif
 // #ifndef MP
 const echarts = null // H5 和 App 环境不需要手动引入
@@ -67,7 +67,7 @@ const option = {
   tooltip: { 
 		trigger:'item',
 		formatter(params) {
-			return `X : ${params.data[0] + parseInt(xInput.display)}, Y: ${params.data[1] + parseInt(zInput.display)}`
+			return `X : ${params.data[0] + parseInt(xInput.display)}, Z: ${params.data[1] + parseInt(zInput.display)}`
 		}
 	},
   xAxis: { 
@@ -90,6 +90,7 @@ const option = {
     }
   ],
 	visualMap: {
+		show: false,
 	  min: 0,
 	  max: rInput.display,
 	  dimension: 2,
@@ -115,6 +116,7 @@ const initChart = async () => {
 watch([() => xInput.display, () => zInput.display, () => rInput.display], () => {
 	// 更新渲染点数据
 	points.value = getVeinOriginsSquare(parseInt(xInput.display), parseInt(zInput.display), parseInt(rInput.display))
+	// 更新偏移渲染点
 	pointsOffset.value = points.value.map(p => [
 		p[0] - parseInt(xInput.display),
 		p[1] - parseInt(zInput.display),
@@ -173,7 +175,7 @@ onUnload(() => {
 }
 
 .description-text {
-	font-size: fs('small');
+	font-size: fs('normal');
 	color: #6c6c6c;
 }
 

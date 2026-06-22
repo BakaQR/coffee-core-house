@@ -24,7 +24,7 @@
 	<view class="container">
 		<view>
 			<text color="#027fff" class="grid-title-text">GTNH 工具</text>
-			<uni-section class="mb-10" title="当前数据版本: GT New Horizons 2.9.0-beta-1" type="line" titleFontSize='14rpx' ></uni-section>
+			<uni-section class="mb-10" title="当前数据版本: GT New Horizons 2.9.0-beta-1" type="line" titleFontSize='22rpx' ></uni-section>
 			<view class="grid-nav">
 				<view class="grid-item-container" 
 					v-for="item in gtnhNavList" 
@@ -33,14 +33,14 @@
 					@click="toPage(item.page)">
 					<image v-if="item.icon" :src="item.icon"/>
 					<uni-icons v-else type="plusempty" size="100rpx"></uni-icons>
-					<text>{{ item.name }}</text>
+					<text class="grid-item-title">{{ item.name }}</text>
 				</view>
 			</view>
 		</view>
 		
 		<view>
 			<text color="#027fff"  class="grid-title-text">推荐</text>
-			<uni-section class="mb-10" title="注意：以下均为外站链接，个人认为值得分享的网站，仅推荐，与本站无关" type="line" titleFontSize='14rpx' ></uni-section>
+			<uni-section class="mb-10" title="注意：以下均为外站链接，个人认为值得分享的网站，仅推荐，与本站无关" type="line" titleFontSize='22rpx' ></uni-section>
 			<view class="grid-nav">
 				<view class="grid-item-container" 
 					v-for="item in outsideNavList" 
@@ -49,8 +49,8 @@
 					@click="openUrl(item.url)">
 					<image v-if="item.icon" :src="item.icon"/>
 					<uni-icons v-else type="plusempty" size="100"></uni-icons>
-					<text>{{ item.name }}</text>
-					<text class="grid-item-description-text">{{ item.description }}</text>
+					<text class="grid-item-title">{{ item.name }}</text>
+					<text class="grid-item-description">{{ item.description }}</text>
 				</view>
 			</view>
 		</view>
@@ -77,9 +77,9 @@ const appName = ref(app.globalData.appName)
 const version = ref(app.globalData.version)
 
 const swiperImage = [
-	'/static/background/Homepage-background-01.png',
-	'/static/background/Homepage-background-02.png',
-	'/static/background/Homepage-background-03.png'
+	'/static/background/Homepage-background-01.jpg',
+	'/static/background/Homepage-background-02.jpg',
+	'/static/background/Homepage-background-03.jpg'
 ]
 
 const swiperCurrentIndex = ref(0)
@@ -89,9 +89,9 @@ const swiperChange = (e) => {
 }
 
 const gtnhNavList = [
-	{ id: 1, name: 'GTNH 矿脉定位器', icon: '/static/gtnh/ores/iron.png', page: 'gtnh-veins' },
-	{ id: 2, name: 'GTNH 材料计算器', icon: '/static/gtnh/material/Steel.png', page:'gtnh-material' },
-	{ id: 3, name: '更多工具敬请期待...' },
+	{ id: 1, name: 'GTNH矿脉定位器', icon: '/static/gtnh/ores/iron.png', page: 'gtnh-veins' },
+	{ id: 2, name: 'GTNH材料计算器', icon: '/static/gtnh/material/Steel.png', page:'gtnh-material' },
+	{ id: 3, name: '敬请期待...' },
 ]
 
 // 外站链接
@@ -222,8 +222,13 @@ onUnload(() => {
 	padding-left: 8rpx;
 }
 
-.grid-item-description-text {
+.grid-item-title {
 	font-size: fs('small');
+	text-align: center;
+}
+
+.grid-item-description {
+	font-size: fs('xs');
 	color: #6c6c6c;
 	text-align: center;
 	padding: 0 16rpx;
