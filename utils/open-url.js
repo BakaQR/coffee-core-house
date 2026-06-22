@@ -1,3 +1,5 @@
+import appInfo from '@/static/appinfo.json'
+
 export function openUrl(url) {
   if (!/^https?:\/\//.test(url)) {
     console.warn('openUrl: not a http(s) url', url)
@@ -15,12 +17,12 @@ export function openUrl(url) {
   // #ifdef MP-WEIXIN
 	if(url === 'https://tingdong.cn/'){
 		uni.navigateToMiniProgram({
-		  appId: 'wxd93af1a26eaeba9e',      // 必填，wx 开头
+		  appId: appInfo.targetApp.tdyq,
 		  extraData: {
 		    from: 'bakaqr_coffee_core_house',
-		    userId: 'wx3b438c249d99f80f'
+		    userId: appInfo.myApp.Appid
 		  },
-		  envVersion: 'release',               // release / trial / develop
+		  envVersion: 'release',
 		  success(res) {
 		    console.log('跳转成功', res)
 		  },
