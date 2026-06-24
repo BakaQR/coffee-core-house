@@ -24,7 +24,6 @@
 <script setup>
 import { ref } from 'vue';
 import { onLoad } from '@dcloudio/uni-app'
-import MaterialCard from '@/components/MaterialCard.vue'
 
 const categories = ['全部', '机器', '外壳'];
 const selectedCategory = ref('');
