@@ -14,6 +14,7 @@
 		globalData: {
 			appName: 'Coffee Core Tools',
 			version: '0.0.1',
+			gtnhDataVersion: 'GT New Horizons 2.9.0-beta-1'
 		}
 	}
 </script>
@@ -29,6 +30,7 @@
 		height: 100%;
 		overflow: auto;
 		margin: 0 auto;
+		box-sizing: border-box;
 	}
 
 	/* #endif */

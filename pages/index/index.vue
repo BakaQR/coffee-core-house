@@ -24,7 +24,7 @@
 	<view class="container">
 		<view>
 			<text color="#027fff" class="grid-title-text">GTNH 工具</text>
-			<uni-section class="mb-10" title="当前数据版本: GT New Horizons 2.9.0-beta-1" type="line" titleFontSize='22rpx' ></uni-section>
+			<uni-section class="mb-10" :title="dataVersion" type="line" titleFontSize='22rpx' ></uni-section>
 			<view class="grid-nav">
 				<view class="grid-item-container" 
 					v-for="item in gtnhNavList" 
@@ -69,12 +69,10 @@ import { ref } from 'vue';
 import { onHide, onShow, onLoad, onUnload } from '@dcloudio/uni-app'
 import { openUrl } from '@/utils/open-url.js'
 
-// uni-app 组件列表
-// const href = ref('https://uniapp.dcloud.io/component/README?id=uniui')
-
 const app = getApp()
 const appName = ref(app.globalData.appName)
 const version = ref(app.globalData.version)
+const dataVersion = ref("当前数据版本: " + app.globalData.gtnhDataVersion)
 
 const swiperImage = [
 	'/static/background/Homepage-background-01.jpg',
@@ -89,8 +87,8 @@ const swiperChange = (e) => {
 }
 
 const gtnhNavList = [
-	{ id: 1, name: 'GTNH矿脉定位器', icon: '/static/gtnh/ores/iron.png', page: 'gtnh-veins' },
-	{ id: 2, name: 'GTNH材料计算器', icon: '/static/gtnh/material/Steel.png', page:'gtnh-material' },
+	{ id: 1, name: 'GTNH矿脉定位器', icon: '/static/gtnh/ores/iron-ore.png', page: 'gtnh-veins' },
+	{ id: 2, name: 'GTNH材料计算器', icon: '/static/gtnh/material/iron.png', page:'gtnh-material' },
 	{ id: 3, name: '敬请期待...' },
 ]
 

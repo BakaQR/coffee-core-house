@@ -11,3 +11,15 @@ $font-size: (
 @function fs($size-name) {
 	@return map-get($font-size, $size-name);
 }
+
+.title-text {
+	font-size: fs('xxl');
+	font-weight: bold;
+	color: #027fff;
+	display: block;
+}
+
+.description-text {
+	font-size: fs('normal');
+	color: #6c6c6c;
+}

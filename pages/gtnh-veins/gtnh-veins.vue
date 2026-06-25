@@ -167,18 +167,6 @@ onUnload(() => {
 	gap: 8rpx;
 }
 
-.title-text {
-	font-size: fs('xxl');
-	font-weight: bold;
-	color: #027fff;
-	display: block;
-}
-
-.description-text {
-	font-size: fs('normal');
-	color: #6c6c6c;
-}
-
 .echarts	{
 	width: 600rpx;
 	height: 600rpx;
