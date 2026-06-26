@@ -25,8 +25,6 @@ const item = ITEMLIST[props.id]
 </script>
 
 <style scoped lang="scss">
-$font-size-normal: 18rpx;
-$font-size-xl: 20rpx;
 
 .material-card {
 	width: 180rpx;
@@ -45,7 +43,7 @@ $font-size-xl: 20rpx;
 }
 
 .name {
-  font-size: fs('xxl');
+  font-size: fs('xl');
   color: #333;
 }
 
@@ -67,14 +65,5 @@ $font-size-xl: 20rpx;
 	align-items: center;
 }
 
-.section-title {
-  font-size: $font-size-normal;
-  color: #666;
-}
-
-.section-icon{
-	width: 24rpx;
-	height: 24rpx
-}
 
 </style>

@@ -89,7 +89,7 @@ const swiperChange = (e) => {
 const gtnhNavList = [
 	{ id: 1, name: 'GTNH矿脉定位器', icon: '/static/gtnh/ores/iron-ore.png', page: 'gtnh-veins' },
 	{ id: 2, name: 'GTNH材料计算器', icon: '/static/gtnh/material/iron.png', page:'gtnh-material' },
-	{ id: 3, name: '敬请期待...' },
+	{ id: 3, name: '敬请期待...', page: 'test-page' },
 ]
 
 // 外站链接

@@ -1,3 +1,6 @@
+// uni.storage 仓库 id
+const UNISTORAGENAME = 'material-settings'
+
 // 原材料对象字典
 export const RAWLIST = {
 	/*
@@ -19,72 +22,69 @@ export const CREATINGMETHOD = {
 	alloySmelter: '合金炉'
 }
 
+// 从 uni.storage 中获取对应材料处理方式 根据处理方式计算 get 返回的材料数量
+// 使用 pinia 仓库搭配 gtnh-material-settings.vue 页面修改 uni.storage 数据
+const getCreatingMethod = () => {
+	return uni.getStorageSync(UNISTORAGENAME)
+}
+
 // 方块
 export const ITEMLIST = {
 	/*
 		方块数据结构
-		ITEMLIST[0].get() 默认配方
-		使用 method 标记制作路线
-		使用数组下标表示其他制作路径的配方 ITEMLIST[1].get()
-		get() 返回一个数组 [0][0]表示RAWLIST字典中的材料 [0][1] 表示所需数量
-		模板:
+		ITEMLIST.Coke_Oven.recipe.get(2) 获取制作 2 个该方块的材料配方
 		xx: {
 			id: 'x', name: 'xxx', 
 			icon: '/static/gtnh/block/xxxx.png',
-			material: [
-				{
-					get: (createNumber) => {
-						return [ [], [] ]
-					},
-				},
-			],
-			method: []
+			recipe: {
+				get: (createNumber) => {
+					return [ [], [] ]
+				}
+			},
 		}
 	*/
 	
 	Coke_Oven: {
 		id: 'Coke_Oven', name: '焦炉', 
 		icon: '/static/gtnh/block/Icon_gregtech_gt.blockmachines_236.png',
-		material: [
-			{
-				get: (createNumber) => {
-					const clay = Math.ceil(createNumber * 4 / 3) * 6
-					const sand = Math.ceil(createNumber * 4 / 3) * 10
-					const cobblestone = 6 * createNumber
-					const flint = 3 * createNumber
-					return [ [ RAWLIST.clay, clay ], [ RAWLIST.sand, sand ], [ RAWLIST.cobblestone, cobblestone], [ RAWLIST.flint, flint ] ]
-				},
-			},{
-				get: (createNumber) => {
-					const clay = 4 * createNumber
-					const sand = 4 * createNumber
-					const cobblestone = 6 * createNumber
-					const flint = 3 * createNumber
-					return [ [ RAWLIST.clay, clay ], [ RAWLIST.sand, sand ], [ RAWLIST.cobblestone, cobblestone], [ RAWLIST.flint, flint ] ]
-				},
-			},
-		],
-		method: [ CREATINGMETHOD.creating, CREATINGMETHOD.alloySmelter ]
+		recipe: {
+			get: (createNumber) => {
+				let clay = 0; let sand = 0; let cobblestone = 0; let flint = 0;
+				if(getCreatingMethod().CokeOvenBrickUseAlloySmelter){
+					clay = 4 * createNumber
+					sand = 4 * createNumber
+					cobblestone = 6 * createNumber
+					flint = 3 * createNumber
+				}else {
+					clay = Math.ceil(createNumber * 4 / 3) * 6
+					sand = Math.ceil(createNumber * 4 / 3) * 10
+					cobblestone = 6 * createNumber
+					flint = 3 * createNumber
+				}
+				return [ [ RAWLIST.clay, clay ], [ RAWLIST.sand, sand ], [ RAWLIST.cobblestone, cobblestone], [ RAWLIST.flint, flint ] ]
+			}
+		}
 	},
 	
 	Coke_Oven_Bricks: { 
-		id: 'Coke_Oven_Bricks', name: '焦炉砖', 
+		id: 'Coke_Oven_Bricks', name: '焦炉砖墙', 
 		icon: '/static/gtnh/block/Icon_gregtech_gt.blockcasings12.png',
-		material: [
-			{
-				get: (createNumber) => {
-					const clay = Math.ceil(createNumber * 4 / 3) * 3
-					const sand = Math.ceil(createNumber * 4 / 3) * 5
-					return [ [ RAWLIST.clay, clay ], [ RAWLIST.sand, sand ] ]
-				},
-			},{
-				get: (createNumber) => {
-					const clay = 2 * createNumber
-					const sand = 2 * createNumber
-					return [ [ RAWLIST.clay, clay ], [ RAWLIST.sand, sand ] ]
-				},
+		recipe: {
+			get: (createNumber) => {
+				let clay = 0; let sand = 0;
+				if(getCreatingMethod().CokeOvenBrickUseAlloySmelter){
+					clay = 2 * createNumber
+					sand = 2 * createNumber
+				}else {
+					clay = Math.ceil(createNumber * 4 / 3) * 3
+					sand = Math.ceil(createNumber * 4 / 3) * 5
+				}
+				return [ [ RAWLIST.clay, clay ], [ RAWLIST.sand, sand ] ]
 			}
-		],
-		method: [ CREATINGMETHOD.creating, CREATINGMETHOD.alloySmelter ]
-	}
+		}
+	},
+	
+	
+	
+	
 }

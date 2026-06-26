@@ -63,8 +63,6 @@ onLoad(() => {
 </script>
 
 <style scoped lang="scss">
-$font-size-normal: 18rpx;
-$font-size-xl: 20rpx;
 
 .container {
 	padding: 16rpx;
@@ -102,7 +100,6 @@ $font-size-xl: 20rpx;
   padding: 16rpx;
 	margin: 16rpx 8rpx;
   color: #333;
-  font-size: $font-size-xl;
 	text-align: center;
   cursor: pointer;
 	border-radius: 8rpx;
@@ -126,7 +123,7 @@ $font-size-xl: 20rpx;
 }
 
 .sider-text {
-	font-size: fs('normal');
+	font-size: fs('xxl');
 }
 
 .content {
@@ -134,11 +131,9 @@ $font-size-xl: 20rpx;
 	flex-direction: column;
 	gap: 32rpx;
   padding: 16rpx 32rpx;
-	font-size: $font-size-normal;
 	overflow-y: auto;
 	box-sizing: border-box;
-	
-	scrollbar-width: none;          /* Firefox 隐藏 */
+	scrollbar-width: none;
 }
 
 .item-container {
@@ -152,11 +147,7 @@ $font-size-xl: 20rpx;
 .search-input {
 	padding: 0;
 	width: 100%; 
-	box-sizing: border-box;
 	
-	:deep(.uni-input-input) {
-		font-size: fs('normal');
-	}
 }
 
 </style>
