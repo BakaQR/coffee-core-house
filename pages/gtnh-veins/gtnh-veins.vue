@@ -154,7 +154,7 @@ onUnload(() => {
 
 <style lang="scss">
 .container{
-	padding: 24rpx;
+	padding: 16rpx;
 }
 
 .coordinates-input {

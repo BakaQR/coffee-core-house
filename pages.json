@@ -29,6 +29,12 @@
 		"style": {
 			"navigationBarTitleText": ""
 		}
+	},
+	{
+		"path": "pages/gtnh-material-settings/gtnh-material-settings",
+		"style": {
+			"navigationBarTitleText": "GTNH 材料计算器 设置"
+		}
 	}
 ],
 	"globalStyle": {
