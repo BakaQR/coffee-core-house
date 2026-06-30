@@ -9,7 +9,7 @@ export const useMaterialSettingsStore = defineStore('gtnh-material-settings', ()
 	
 	const list = ref({
 		CokeOvenBrickUseAlloySmelter: {
-			descriptions: '焦炉砖使用合金炉制作 (1黏土+1沙子=2焦炉砖)',
+			descriptions: '焦炉砖使用合金炉制作',
 			check: false,
 		},
 		PlateMethod: {
@@ -21,7 +21,7 @@ export const useMaterialSettingsStore = defineStore('gtnh-material-settings', ()
 		
 	})
 	
-	const originList = list.value
+	const originList = JSON.parse(JSON.stringify(list.value))
 	
 	// 开关切换
 	const toggle = (name) => {
@@ -53,10 +53,20 @@ export const useMaterialSettingsStore = defineStore('gtnh-material-settings', ()
 	const initializa = () => {
 		const result = getData(UNISTORAGENAME)
 		if(result !== undefined){
-			list.value = result
+			// list.value = result
+			Object.keys(result).forEach((keyName, index) => {
+				if('check' in result[keyName]){
+					list.value[keyName].check = result[keyName].check
+				}else if('option' in result[keyName]) {
+					list.value[keyName].option = result[keyName].option
+				}else {
+					console.log('storage not exist data: ', keyName)
+				}
+			})
 		}else {
 			console.log('数据读取失败，uni.storage 仓库数据未初始化，即将初始化 uni.storage 仓库数据')
-			saveData(UNISTORAGENAME, originList)
+			list.value = JSON.parse(JSON.stringify(originList))
+			saveData(UNISTORAGENAME, list.value)
 		}
 	}
 	

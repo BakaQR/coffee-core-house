@@ -103,7 +103,7 @@ onLoad(() => {
 	align-items: center;
 	
 	text {
-		width: 550rpx;
+		width: 500rpx;
 	}
 	
 	&.option {

@@ -19,6 +19,27 @@
 		}
 	},
 	{
+		"path": "pages/gtnh-material/selecter",
+		"style": {
+			"navigationBarTitleText": "材料",
+			"navigationStyle": "custom"
+		}
+	},
+	{
+		"path": "pages/gtnh-material/list",
+		"style": {
+			"navigationBarTitleText": "清单",
+			"navigationStyle": "custom"
+		}
+	},
+	{
+		"path": "pages/gtnh-material/settings",
+		"style": {
+			"navigationBarTitleText": "设置",
+			"navigationStyle": "custom"
+		}
+	},
+	{
 		"path": "pages/webview/webview",
 		"style": {
 			"navigationBarTitleText": ""
@@ -28,12 +49,6 @@
 		"path": "pages/test-page/test-page",
 		"style": {
 			"navigationBarTitleText": ""
-		}
-	},
-	{
-		"path": "pages/gtnh-material-settings/gtnh-material-settings",
-		"style": {
-			"navigationBarTitleText": "设置"
 		}
 	}
 ],
@@ -45,6 +60,5 @@
 		"app-plus": {
 			"background": "#efeff4"
 		}
-		
 	}
 }

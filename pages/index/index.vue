@@ -115,19 +115,21 @@ const outsideNavList = [
 ]
 
 const toPage = (page) => {
+
 	uni.navigateTo({
 		url: '/pages/' + page + '/' + page,
 		success: (res) => { 
 			// res.eventChannel.emit('acceptData', { id: 'bakaqr' })
 			console.log('to: ' + page)
 		},
-		fail: () => console.log('fail to: ' + page),
+		fail: (e) => console.log(e),
 		events: {
 			// acceptData: function(data) { console.log(data) }
 		},
 		animationType: 'pop-in',
 		animationDuration: 500
 	})
+
 }
 
 onHide(() => {

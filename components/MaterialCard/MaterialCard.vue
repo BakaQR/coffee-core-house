@@ -43,7 +43,7 @@ const item = ITEMLIST[props.id]
 }
 
 .name {
-  font-size: fs('xl');
+  font-size: fs('normal');
   color: #333;
 }
 
