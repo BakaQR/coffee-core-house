@@ -14,7 +14,7 @@
 				<view class="setting option" v-else-if="'option' in item">
 					<!-- selecter -->
 					<text>{{ item.descriptions }}</text>
-					<uni-data-select class="uni-data-select" v-model="plateModeSelecter.value" :localdata="plateModeSelecter.display" @change="changeSelecter(plateModeSelecter, key)" :clear="false"/>
+					<uni-data-select class="uni-data-select" v-model="plateModeSelecter.val" :localdata="plateModeSelecter.display" @change="changeSelecter(plateModeSelecter, key)" :clear="false"/>
 				</view>
 			</view>
 		</view>
@@ -33,9 +33,10 @@
 </template>
 
 <script setup>
-import { onLoad, onShow } from '@dcloudio/uni-app'
+import { onLoad, onReady } from '@dcloudio/uni-app'
 import { useMaterialSettingsStore } from '@/store/gtnh-material-settings.js'
 import { useUniDataSelect } from '@/utils/uni-selecter-data.js'
+import { nextTick } from 'vue'
 
 const materialStore = useMaterialSettingsStore()
 
@@ -107,7 +108,7 @@ onLoad(() => {
 	
 	&.option {
 		text {
-			width: 450rpx;
+			width: 400rpx;
 		}
 	}
 	
