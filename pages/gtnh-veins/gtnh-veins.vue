@@ -35,7 +35,6 @@
 
 <script setup>
 import { computed, ref, watch } from 'vue'
-import { onHide, onShow, onLoad, onUnload } from '@dcloudio/uni-app'
 import { getVeinOriginsSquare } from '@/utils/veins-calculater.js'
 import { useIntegerInput } from '@/utils/integer-input.js'
 
@@ -131,23 +130,6 @@ watch([() => xInput.display, () => zInput.display, () => rInput.display], () => 
 	chartRef.value?.setOption({
 		visualMap: { max: parseInt(rInput.display) || 0 }
 	})
-})
-
-
-onHide(() => {
-	console.log('gtnh-veins on hide')
-})
-
-onShow(() => {
-	console.log('gtnh-veins on show')
-})
-
-onLoad(() => {
-	console.log('gtnh-veins on load')
-})
-
-onUnload(() => {
-	console.log('gtnh-veins on unload')
 })
 
 </script>

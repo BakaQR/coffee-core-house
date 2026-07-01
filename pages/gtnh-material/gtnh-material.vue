@@ -15,6 +15,17 @@
 			<Settings v-else-if="currentTab === 2" />
 			<!-- #endif -->
 			
+			<!-- 在 selecter.vue 中的材料点击时都会把数据同步到 pinia 中交由该 popup 渲染	 -->
+			<view>
+				<uni-popup ref="selecterPopupRef" type="center">
+					<uni-popup-dialog 
+						type="info" cancelText="取消" confirmText="确定" title="添加到清单" 
+						@confirm="confirm" @close="cancel">
+							<text>{{ selecterStore.getRecipeInfo() }}</text>
+						</uni-popup-dialog>
+				</uni-popup>
+			</view>
+			
 		</view>
 		
 		<view class="tab-bar">
@@ -34,19 +45,53 @@
 </template>
 
 <script setup>
-import { computed, ref } from 'vue'
+import { computed, ref, watch } from 'vue'
+import { onLoad, onUnload } from '@dcloudio/uni-app'
 import Selecter from '@/pages/gtnh-material/selecter.vue'
 import List from '@/pages/gtnh-material/list.vue'
 import Settings from '@/pages/gtnh-material/settings.vue'
+import { useMaterialSelecterStore } from '@/store/gtnh-material-selecter.js'
 
 const currentTab = ref(0)
 const comp = [ Selecter, List, Settings ]
 const currentComp = computed(() => comp[currentTab.value])
+
 const safeBottom = ref(uni.getSystemInfoSync().safeAreaInsets?.bottom || 0)
+
+const selecterPopupRef = ref(null)
+const selecterStore = useMaterialSelecterStore()
 
 const switchTab = (index) => {
 	currentTab.value = index
 }
+
+const confirm = () => {
+	selecterStore.close()
+}
+
+const cancel = () => {
+	selecterStore.close()
+}
+
+watch(() => selecterStore.isShow, (v) => {
+	if(v) {
+		selecterPopupRef.value?.open()
+	}else {
+		selecterPopupRef.value?.close()
+	}
+})
+
+onLoad(() => {
+	selecterStore.close()
+	selecterPopupRef.value?.close()
+})
+
+onUnload(() => {
+	selecterStore.close()
+	selecterPopupRef.value?.close()
+})
+
+
 </script>
 
 <style lang="scss">
@@ -87,6 +132,10 @@ $safe-bottom: v-bind(safeBottom);
 
 .body {
 	height: calc(100% - $bottom-nav-height);
+}
+
+:deep(.uni-popup-dialog) {
+	width: 450rpx !important;
 }
 
 </style>

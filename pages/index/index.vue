@@ -66,7 +66,6 @@
 
 <script setup>
 import { ref } from 'vue';
-import { onHide, onShow, onLoad, onUnload } from '@dcloudio/uni-app'
 import { openUrl } from '@/utils/open-url.js'
 
 const app = getApp()
@@ -89,7 +88,7 @@ const swiperChange = (e) => {
 const gtnhNavList = [
 	{ id: 1, name: 'GTNH矿脉定位器', icon: '/static/gtnh/ores/iron-ore.png', page: 'gtnh-veins' },
 	{ id: 2, name: 'GTNH材料计算器', icon: '/static/gtnh/material/iron.png', page:'gtnh-material' },
-	{ id: 3, name: '敬请期待...', page: 'gtnh-material-settings' },
+	{ id: 3, name: '敬请期待...' },
 ]
 
 // 外站链接
@@ -131,22 +130,6 @@ const toPage = (page) => {
 	})
 
 }
-
-onHide(() => {
-	console.log('index on hide')
-})
-
-onShow(() => {
-	console.log('index on show')
-})
-
-onLoad(() => {
-	console.log('index on load')
-})
-
-onUnload(() => {
-	console.log('index on unload')
-})
 
 </script>
 

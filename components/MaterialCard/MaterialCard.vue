@@ -1,6 +1,6 @@
 <template>
   <view class="material-card">
-    <view class="content">
+    <view class="content" @click="openPopup">
       <image v-if="item.icon" :src="item.icon" class="icon"></image>
       <text class="name">{{ item.name }}</text>
     </view>
@@ -8,9 +8,10 @@
 </template>
 
 <script setup>
-import { defineProps } from 'vue';
+import { defineProps, ref } from 'vue';
 import { onLoad } from '@dcloudio/uni-app'
 import { ITEMLIST } from '@/utils/gtnh-material-dictionary.js'
+import { useMaterialSelecterStore } from '@/store/gtnh-material-selecter.js'
 
 const props = defineProps({
   id: {
@@ -21,6 +22,13 @@ const props = defineProps({
 
 // 根据传入 id 搜索 ITEMLIST 字典中对应的材料
 const item = ITEMLIST[props.id]
+
+const selecterStore = useMaterialSelecterStore()
+
+const openPopup = () => {
+	selecterStore.setRecipeInfo(props.id, 3)
+	selecterStore.open()
+}
 
 </script>
 

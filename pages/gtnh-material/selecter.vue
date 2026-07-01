@@ -64,6 +64,7 @@ onLoad(() => {
 })
 // #endif
 
+// 微信小程序中不支持动态组件 因此使用 v-if 进行渲染 没有 onLoad 生命周期 使用 onMounted 替代
 // #ifdef MP-WEIXIN
 onMounted(() => {
 	selectedCategory.value = categories[0]
@@ -72,7 +73,6 @@ onMounted(() => {
 </script>
 
 <style scoped lang="scss">
-
 .container {
 	padding: 16rpx;
 	display: flex;
