@@ -6,7 +6,7 @@ export const useUniDataSelect = () => {
 	const display = ref([])
 	
 	// 传入数组定义选项  [ '选项1', '选项2', '选项3', ... ]
-	const initializa = (array, baseValue) => {
+	const initialize = (array, baseValue) => {
 		array.forEach((option, index, arr) => {
 			display.value[index] = { value: index, text: option }
 		})
@@ -26,5 +26,5 @@ export const useUniDataSelect = () => {
 		return val.value
 	}
 	
-	return reactive({ val, display, initializa, getCurrentSelectValue})
+	return reactive({ val, display, initialize, getCurrentSelectValue})
 }

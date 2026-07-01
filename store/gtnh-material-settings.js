@@ -1,6 +1,7 @@
 import { ref } from 'vue'
 import { defineStore } from 'pinia'
 import { saveData, getData, removeData } from '@/utils/pinia-to-storage.js'
+import { useUniDataSelect } from '@/utils/uni-selecter-data.js'
 
 // 用于设置页 提供修改选项 影响配方计算的材料数量
 // 在设置页修改选项后 同步修改到 uni.storage 中
@@ -14,9 +15,15 @@ export const useMaterialSettingsStore = defineStore('gtnh-material-settings', ()
 		},
 		PlateMethod: {
 			descriptions: '板类材料制作方式',
-			option: 'hammer_tool',  // hammer_tool, hammer_machine, bending
+			option: 'hammer_tool',
 			display: [ '锻造锤（工具）', '锻造锤（机器）', '卷板机' ],
 			map: { 0: 'hammer_tool', 1: 'hammer_machine', 2: 'bending'},
+		},
+		RodMethod: {
+			descriptions: '杆类材料制作方式',
+			option: 'file-lathe',
+			display: [ '锉刀/车床', '压模机' ],
+			map: { 0: 'file-lathe', 1: 'extruder'},
 		},
 		
 	})
@@ -46,11 +53,11 @@ export const useMaterialSettingsStore = defineStore('gtnh-material-settings', ()
 	
 	const reset = () => {
 		removeData(UNISTORAGENAME)
-		initializa()
+		initialize()
 	}
 	
 	// 在使用的页面 onLoad 中使用
-	const initializa = () => {
+	const initialize = () => {
 		const result = getData(UNISTORAGENAME)
 		if(result !== undefined){
 			// list.value = result
@@ -64,7 +71,7 @@ export const useMaterialSettingsStore = defineStore('gtnh-material-settings', ()
 				}
 			})
 		}else {
-			console.log('数据读取失败，uni.storage 仓库数据未初始化，即将初始化 uni.storage 仓库数据')
+			console.log('数据读取失败，uni.storage 仓库数据未初始化，即将初始化 ' + UNISTORAGENAME +' 仓库数据')
 			list.value = JSON.parse(JSON.stringify(originList))
 			saveData(UNISTORAGENAME, list.value)
 		}
@@ -76,6 +83,6 @@ export const useMaterialSettingsStore = defineStore('gtnh-material-settings', ()
 		setOption,
 		getOptionMapReverse,
 		reset,
-		initializa,
+		initialize,
 	}
 })

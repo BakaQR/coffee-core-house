@@ -4,7 +4,7 @@
 			<view class="header">
 				<text class="title-text">材料制作方式</text>
 			</view>
-			<view v-for="(item, key) in materialStore.list" :key="key">
+			<view v-for="(item, key) in materialSettingStore.list" :key="key">
 				<view class="setting" v-if="'check' in item">
 					<!-- switch -->
 					<text>{{ item.descriptions }}</text>
@@ -14,7 +14,12 @@
 				<view class="setting option" v-else-if="'option' in item">
 					<!-- selecter -->
 					<text>{{ item.descriptions }}</text>
-					<uni-data-select class="uni-data-select" v-model="plateModeSelecter.val" :localdata="plateModeSelecter.display" @change="changeSelecter(plateModeSelecter, key)" :clear="false"/>
+					<uni-data-select class="uni-data-select" 
+					v-if="selecterObj[key]"
+					v-model="selecterObj[key].val" 
+					:localdata="selecterObj[key].display" 
+					@change="changeSelecter(selecterObj[key], key)" 
+					:clear="false"/>
 				</view>
 			</view>
 		</view>
@@ -28,22 +33,21 @@
 				<button class="button" @click="reset">重置</button>
 			</view>
 		</view>
-		
 	</view>
 </template>
 
 <script setup>
-import { onLoad, onReady } from '@dcloudio/uni-app'
+import { onLoad } from '@dcloudio/uni-app'
 import { useMaterialSettingsStore } from '@/store/gtnh-material-settings.js'
 import { useUniDataSelect } from '@/utils/uni-selecter-data.js'
-import { nextTick } from 'vue'
+import { nextTick, onMounted, ref } from 'vue'
 
-const materialStore = useMaterialSettingsStore()
+const materialSettingStore = useMaterialSettingsStore()
 
-const plateModeSelecter = useUniDataSelect()
+const selecterObj = ref({})
 
 const changeSwitch = (keyName) => {
-	materialStore.toggle(keyName)
+	materialSettingStore.toggle(keyName)
 }
 
 // selecterItem 是 useUniDataSelect() 创建的对象
@@ -51,29 +55,44 @@ const changeSwitch = (keyName) => {
 // map 是 pinia 仓库中 list 的子对象的 map 传递给 pinia 设置对应选项的值
 const changeSelecter = (selecterItem, keyName) => {
 	const option = selecterItem.getCurrentSelectValue()
-	const map = materialStore.list[keyName].map
-	materialStore.setOption(keyName, map[option])
+	const map = materialSettingStore.list[keyName].map
+	materialSettingStore.setOption(keyName, map[option])
+}
+
+const initialize = () => {
+	materialSettingStore.initialize()
+	
+	const list = materialSettingStore.list
+	for(const key in list){
+		const item = list[key]
+		if('option' in item){
+			const selecter = useUniDataSelect()
+			selecter.initialize(
+				item.display, 
+				materialSettingStore.getOptionMapReverse(item.map, item.option)
+			)
+			selecterObj.value[key] = selecter
+		}
+	}
 }
 
 const reset = () => {
-	materialStore.reset()
-	initializa()
+	materialSettingStore.reset()
+	initialize()
 }
 
-const initializa = () => {
-	materialStore.initializa()
-	
-	plateModeSelecter.initializa(
-		materialStore.list.PlateMethod.display, 
-			materialStore.getOptionMapReverse(
-			materialStore.list.PlateMethod.map, 
-			materialStore.list.PlateMethod.option)
-	)
-}
-
+// #ifndef MP-WEIXIN
 onLoad(() => {
-	initializa()
+	initialize()
 })
+// #endif
+
+// #ifdef MP-WEIXIN
+onMounted(() => {
+	initialize()
+})
+// #endif
+
 
 </script>
 
@@ -117,7 +136,7 @@ onLoad(() => {
 	}
 	
 	&:deep(.button) {
-		font-size: fs('xs');
+		font-size: fs('small');
 		width: 120rpx;
 		background-color: #ff3300;
 		color: white;

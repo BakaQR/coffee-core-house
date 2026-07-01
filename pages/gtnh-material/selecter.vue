@@ -41,7 +41,7 @@
 </template>
 
 <script setup>
-import { ref } from 'vue';
+import { ref, onMounted } from 'vue';
 import { onLoad } from '@dcloudio/uni-app'
 import { ITEMLIST, CREATINGMETHOD } from '@/utils/gtnh-material-dictionary.js'
 
@@ -58,9 +58,17 @@ const input = () => {}
 
 const goBack = () => {}
 
+// #ifndef MP-WEIXIN
 onLoad(() => {
 	selectedCategory.value = categories[0]
 })
+// #endif
+
+// #ifdef MP-WEIXIN
+onMounted(() => {
+	selectedCategory.value = categories[0]
+})
+// #endif
 </script>
 
 <style scoped lang="scss">
